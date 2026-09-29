@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>libreria — UI motion catalog</title>
+<title>libreria</title>
 <style>
 :root{--void:#05070f;--cyan:#22d3ee;--fg:#eef2ff;--muted:#8b95b8;--ease:cubic-bezier(0.22,1,0.36,1)}
 *{box-sizing:border-box}html,body{margin:0;background:var(--void);color:var(--fg);font:14px/1.45 system-ui,sans-serif}
@@ -14,23 +14,23 @@ h1{margin:0;font-size:28px;letter-spacing:-.03em}
 .card{background:#0c1224;border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden}
 .card h2{margin:0;font-size:16px}
 .pad{padding:14px 16px 0}
-.meta{font-size:11px;color:var(--muted);margin:4px 0 10px}
-.tag{display:inline-block;margin-right:6px;padding:2px 8px;border-radius:999px;background:rgba(34,211,238,.12);color:var(--cyan);font-size:10px}
+.meta{font-size:11px;color:var(--muted);margin:4px 0 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tag{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(34,211,238,.12);color:var(--cyan);font-size:10px}
+.id{font-family:ui-monospace,monospace;font-size:11px;color:var(--cyan)}
 .stage{min-height:140px;padding:20px 16px 24px;background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(50,140,220,.16),transparent 70%),#03050c}
-.src{padding:0 16px 14px;font-size:11px;color:var(--muted)}
 button{font:inherit;cursor:pointer}
 .glass{background:rgba(14,19,42,.94);border:1px solid rgba(255,255,255,.1);box-shadow:0 18px 50px rgba(0,0,0,.35)}
-.orbit-nav{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:4px;max-width:420px;margin:28px auto 0;padding:8px 12px;border-radius:16px}
-.orbit-nav .pill{position:absolute;top:8px;bottom:8px;border-radius:14px;background:rgba(34,211,238,.18);box-shadow:0 0 12px rgba(56,232,255,.2);transition:left 320ms var(--ease),width 320ms var(--ease)}
+.tabbar{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:4px;max-width:420px;margin:28px auto 0;padding:8px 12px;border-radius:16px}
+.tabbar .pill{position:absolute;top:8px;bottom:8px;border-radius:14px;background:rgba(34,211,238,.18);box-shadow:0 0 12px rgba(56,232,255,.2);transition:left 320ms var(--ease),width 320ms var(--ease)}
 .nav-btn{position:relative;z-index:1;flex:1;border:0;background:0;color:var(--muted);padding:8px 4px 6px;display:flex;flex-direction:column;align-items:center;gap:4px}
 .nav-btn.on{color:var(--fg)}.nav-btn small{font-size:10px}
-.sun-fab{position:relative;width:58px;height:58px;margin-top:-28px;border:0;border-radius:50%;background:radial-gradient(circle at 34% 30%,#fff 0%,#e8f6ff 14%,#9bd7ff 42%,#22d3ee 70%,#0284c7 100%);box-shadow:0 0 22px rgba(34,211,238,.42),inset 0 1px 0 rgba(255,255,255,.7);animation:sun-breathe 3.6s ease-in-out infinite;color:#04212a;font-size:26px}
+.sun-fab{position:relative;width:58px;height:58px;margin-top:-28px;border:0;border-radius:50%;background:radial-gradient(circle at 34% 30%,#fff 0%,#e8f6ff 14%,#9bd7ff 42%,#22d3ee 70%,#0284c7 100%);box-shadow:0 0 22px rgba(34,211,238,.42),inset 0 1px 0 rgba(255,255,255,.7);animation:breathe 3.6s ease-in-out infinite;color:#04212a;font-size:26px}
 .sun-fab .ring{position:absolute;inset:-6px;border:1.5px solid rgba(34,211,238,.45);border-radius:50%;border-top-color:transparent;animation:spin 10s linear infinite}
 .sun-fab .ring2{inset:-11px;border-color:rgba(129,140,248,.35);border-bottom-color:transparent;animation-direction:reverse}
-.ripple{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(56,232,255,.95);animation:orbit-fab-ripple .48s ease-out forwards;pointer-events:none}
-@keyframes sun-breathe{0%,100%{box-shadow:0 0 16px rgba(34,211,238,.32),inset 0 1px 0 #fff}50%{box-shadow:0 0 28px rgba(34,211,238,.55),inset 0 1px 0 #fff}}
+.ripple{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(56,232,255,.95);animation:fab-ripple .48s ease-out forwards;pointer-events:none}
+@keyframes breathe{0%,100%{box-shadow:0 0 16px rgba(34,211,238,.32),inset 0 1px 0 #fff}50%{box-shadow:0 0 28px rgba(34,211,238,.55),inset 0 1px 0 #fff}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes orbit-fab-ripple{from{transform:scale(.35);opacity:.85}to{transform:scale(2.35);opacity:0}}
+@keyframes fab-ripple{from{transform:scale(.35);opacity:.85}to{transform:scale(2.35);opacity:0}}
 .dock{position:relative;display:flex;gap:4px;margin:16px auto 0;padding:8px 10px;border-radius:100px;background:rgba(12,18,36,.72);border:1px solid rgba(255,255,255,.1);width:max-content}
 .bead{position:absolute;top:6px;width:52px;height:calc(100% - 12px);border-radius:100px;background:var(--bead,var(--cyan));opacity:.18;transition:left .48s var(--ease),background-color .38s ease;pointer-events:none}
 .dock-tab{width:52px;height:52px;border:0;background:0;border-radius:50%;color:var(--muted);opacity:.45;transition:opacity .2s,transform .34s var(--ease),color .3s}
@@ -48,8 +48,8 @@ button{font:inherit;cursor:pointer}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .iconpulse{animation:iconpulse 1.6s ease-out infinite}
 @keyframes iconpulse{0%,100%{box-shadow:0 0 0 0 rgba(34,211,238,.55)}50%{box-shadow:0 0 0 7px transparent}}
-.sunpulse{width:36px;height:36px;border-radius:50%;background:#9bd7ff;animation:spg 3.6s ease-in-out infinite}
-@keyframes spg{0%,100%{filter:drop-shadow(0 0 8px #22d3ee)}50%{filter:drop-shadow(0 0 22px #fff)}}
+.glowdot{width:36px;height:36px;border-radius:50%;background:#9bd7ff;animation:glow 3.6s ease-in-out infinite}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 8px #22d3ee)}50%{filter:drop-shadow(0 0 22px #fff)}}
 .star{width:8px;height:8px;border-radius:50%;background:#fff;animation:tw 3s ease-in-out infinite}
 @keyframes tw{0%,100%{opacity:.15}50%{opacity:.9}}
 .gear{width:40px;height:40px;border-radius:10px;background:#1a2344;color:var(--cyan);border:0}
@@ -63,8 +63,8 @@ button{font:inherit;cursor:pointer}
 .g-fab input{flex:1;border:0;background:0;color:var(--fg);padding:0 16px;min-width:0;display:none}
 .g-fab.exp input{display:block}
 .g-fab .plus{width:56px;height:56px;border:0;background:0;color:#fff;font-size:26px;margin-left:auto}
-@keyframes fabSquash{0%{transform:scaleY(1)}35%{transform:scaleY(.86)}65%{transform:scaleY(1.07)}100%{transform:scaleY(1)}}
-.squash{animation:fabSquash .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes squash{0%{transform:scaleY(1)}35%{transform:scaleY(.86)}65%{transform:scaleY(1.07)}100%{transform:scaleY(1)}}
+.squash{animation:squash .4s cubic-bezier(.34,1.56,.64,1)}
 .ripple-btn{position:relative;overflow:hidden;border:0;border-radius:14px;padding:12px 20px;background:linear-gradient(145deg,#5eead4,#22d3ee 40%,#6366f1);color:#04212a;font-weight:700}
 .rip{position:absolute;border-radius:50%;background:rgba(255,255,255,.45);transform:scale(0);animation:m3 560ms ease-out forwards;pointer-events:none}
 @keyframes m3{to{transform:scale(2.6);opacity:0}}
@@ -81,41 +81,33 @@ button{font:inherit;cursor:pointer}
 </style></head>
 <body>
 <header class="top"><h1>libreria</h1>
-<p class="lead">Catalogo live dei pattern UI dei repo teo2810. Ogni card e cliccabile. Sorgenti in src/.</p></header>
+<p class="lead">Anteprime interattive. Cita l’id della card per riusare il pattern.</p></header>
 <div class="grid">
-<section class="card" id="orbit-tabbar-fab"><div class="pad"><h2>Orbit tab bar + sun FAB</h2><div class="meta"><span class="tag">tab</span><span class="tag">fab</span> subSorbit-v2</div></div>
-<div class="stage"><div class="orbit-nav glass" id="onav"><span class="pill" id="opill"></span>
-<button class="nav-btn on" data-t="0">H<small>Home</small></button>
-<button class="nav-btn" data-t="1">O<small>Orbita</small></button>
+<section class="card" id="tab-pill-fab"><div class="pad"><h2>Tab + pill + FAB</h2><div class="meta"><span class="id">tab-pill-fab</span><span class="tag">tab</span><span class="tag">fab</span></div></div>
+<div class="stage"><div class="tabbar glass" id="onav"><span class="pill" id="opill"></span>
+<button class="nav-btn on">H<small>Home</small></button>
+<button class="nav-btn">O<small>Vista</small></button>
 <button class="sun-fab" id="sfab">+<span class="ring"></span><span class="ring ring2"></span></button>
-<button class="nav-btn" data-t="2">A<small>Agenda</small></button>
-<button class="nav-btn" data-t="3">D<small>Dati</small></button></div></div>
-<div class="src">Prompt: tab glass, pill cyan slittante, FAB sole, ripple + anelli.</div></section>
-<section class="card" id="bfpo-bead-dock"><div class="pad"><h2>Bead dock TabBar</h2><div class="meta"><span class="tag">tab</span><span class="tag">drag</span> Bfpo</div></div>
+<button class="nav-btn">A<small>Agenda</small></button>
+<button class="nav-btn">D<small>Dati</small></button></div></div></section>
+<section class="card" id="dock-bead"><div class="pad"><h2>Dock perlina</h2><div class="meta"><span class="id">dock-bead</span><span class="tag">tab</span><span class="tag">dock</span></div></div>
 <div class="stage"><div class="dock" id="dock"><div class="bead" id="bead"></div>
 <button class="dock-tab on" data-c="#22d3ee">H</button>
 <button class="dock-tab" data-c="#34d399">W</button>
 <button class="dock-tab" data-c="#fbbf24">C</button>
-<button class="dock-tab" data-c="#fb7185">S</button></div></div>
-<div class="src">Prompt: dock iOS, perlina colorata, scale icona attiva.</div></section>
-<section class="card" id="glow-switch"><div class="pad"><h2>Glow period switch</h2><div class="meta"><span class="tag">segmented</span> period-switch.tsx</div></div>
-<div class="stage"><div class="switch" id="sw"><span class="g-pill" id="spill"></span><button class="on">Mese</button><button>Anno</button></div></div>
-<div class="src">Prompt: pillola cyan che misura e slitta 320ms.</div></section>
-<section class="card" id="filter-chips"><div class="pad"><h2>Filter chips</h2><div class="meta"><span class="tag">chips</span> filter-chips.tsx</div></div>
-<div class="stage"><div class="chips" id="chips"><button class="chip on">Tutti</button><button class="chip">Attivi</button><button class="chip">In pausa</button><button class="chip">Annullati</button></div></div>
-<div class="src">Prompt: chip rounded-full, attivo cyan.</div></section>
-<section class="card" id="orbit-motion"><div class="pad"><h2>Orbit motion tokens</h2><div class="meta"><span class="tag">animation</span> styles.css</div></div>
-<div class="stage"><div class="tokens"><div class="dot float"></div><div class="dot iconpulse"></div><div class="sunpulse"></div><div class="star"></div><button class="gear" id="gear">G</button><button class="glow-tap">glow-tap</button></div></div>
-<div class="src">sun-breathe, float, iconpulse, gear-spin, twinkle, glow-tap.</div></section>
-<section class="card" id="grocery-expand-fab"><div class="pad"><h2>Expand FAB + squash</h2><div class="meta"><span class="tag">fab</span> Grocery_Shopping</div></div>
-<div class="stage"><div class="g-wrap"><div class="g-fab" id="gfab"><input placeholder="Aggiungi voce..."/><button class="plus" id="gplus">+</button></div></div></div>
-<div class="src">Prompt: FAB che si allarga a input + squash.</div></section>
-<section class="card" id="m3-ripple-sheet"><div class="pad"><h2>Ripple + sheet</h2><div class="meta"><span class="tag">button</span> Project_Subscriptions</div></div>
-<div class="stage" style="text-align:center"><button class="ripple-btn" id="rbtn">Apri sheet</button><div class="sheet" id="sheet" hidden>Callout sheet</div></div>
-<div class="src">ripple M3, modalSheetIn, qaPopIn.</div></section>
-<section class="card" id="math-feedback"><div class="pad"><h2>Math feedback pops</h2><div class="meta"><span class="tag">animation</span> Math_Training</div></div>
-<div class="stage"><div class="maths"><button class="mbtn" id="mpop">pop</button><button class="mbtn" id="mok" style="background:#163">ok</button><button class="mbtn" id="msh" style="background:#411">shake</button></div></div>
-<div class="src">pop, pulseOk, shakeHard.</div></section>
+<button class="dock-tab" data-c="#fb7185">S</button></div></div></section>
+<section class="card" id="segmented-pill"><div class="pad"><h2>Switch segmentato</h2><div class="meta"><span class="id">segmented-pill</span><span class="tag">segmented</span></div></div>
+<div class="stage"><div class="switch" id="sw"><span class="g-pill" id="spill"></span><button class="on">A</button><button>B</button></div></div></section>
+<section class="card" id="chips"><div class="pad"><h2>Chip filtro</h2><div class="meta"><span class="id">chips</span><span class="tag">chips</span></div></div>
+<div class="stage"><div class="chips" id="chips"><button class="chip on">Tutti</button><button class="chip">Attivi</button><button class="chip">Pausa</button><button class="chip">Chiusi</button></div></div></section>
+<section class="card" id="motion-tokens"><div class="pad"><h2>Token motion</h2><div class="meta"><span class="id">motion-tokens</span><span class="tag">animation</span></div></div>
+<div class="stage"><div class="tokens"><div class="dot float"></div><div class="dot iconpulse"></div><div class="glowdot"></div><div class="star"></div><button class="gear" id="gear">G</button><button class="glow-tap">tap</button></div></div></section>
+<section class="card" id="fab-expand"><div class="pad"><h2>FAB espandibile</h2><div class="meta"><span class="id">fab-expand</span><span class="tag">fab</span></div></div>
+<div class="stage"><div class="g-wrap"><div class="g-fab" id="gfab"><input placeholder="Aggiungi..."/><button class="plus" id="gplus">+</button></div></div></div></section>
+<section class="card" id="ripple-sheet"><div class="pad"><h2>Ripple + sheet</h2><div class="meta"><span class="id">ripple-sheet</span><span class="tag">button</span></div></div>
+<div class="stage" style="text-align:center"><button class="ripple-btn" id="rbtn">Apri</button><div class="sheet" id="sheet" hidden>Pannello</div></div></section>
+<section class="card" id="feedback"><div class="pad"><h2>Feedback tap</h2><div class="meta"><span class="id">feedback</span><span class="tag">animation</span></div></div>
+<div class="stage"><div class="maths"><button class="mbtn" id="mpop">pop</button><button class="mbtn" id="mok" style="background:#163">ok</button><button class="mbtn" id="msh" style="background:#411">shake</button></div></div></section>
 </div>
 <script>
 function measurePill(bar,btn,pill){const br=bar.getBoundingClientRect(),er=btn.getBoundingClientRect();pill.style.left=(er.left-br.left)+'px';pill.style.width=er.width+'px';}
