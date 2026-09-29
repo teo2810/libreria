@@ -1,0 +1,61 @@
+.dock-layer {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  padding-bottom: max(18px, env(safe-area-inset-bottom));
+  pointer-events: none;
+}
+.dock {
+  position: relative;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 10px;
+  background: color-mix(in srgb, var(--bg-1) 72%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  backdrop-filter: blur(20px) saturate(140%);
+  box-shadow: 0 12px 30px var(--shadow);
+}
+.bead {
+  position: absolute;
+  top: 6px;
+  width: 52px;
+  height: calc(100% - 12px);
+  border-radius: 100px;
+  background: var(--bead-color, var(--cyan));
+  opacity: 0.16;
+  transition: left 480ms var(--ease-spring), background-color 380ms ease;
+  pointer-events: none;
+}
+.dock-tab {
+  position: relative;
+  z-index: 1;
+  width: 52px;
+  height: 52px;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  color: var(--text-1);
+  transition: opacity 200ms ease, transform 340ms var(--ease-spring), color 300ms ease;
+  opacity: 0.45;
+}
+.dock-tab.active {
+  opacity: 1;
+  transform: scale(1.12);
+  color: var(--tab-color, var(--cyan));
+}
+.fab {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(155deg, var(--cyan), color-mix(in srgb, var(--cyan) 60%, var(--mint)));
+  color: #04212a;
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--cyan) 40%, transparent);
+  transition: transform 160ms var(--ease-spring);
+}
+.fab:active { transform: scale(0.92); }
