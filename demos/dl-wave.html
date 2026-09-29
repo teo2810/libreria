@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>dl-wave</title>
+<style>
+  html,body{margin:0;min-height:100%;background:#070b14;color:#eef2ff;font:14px/1.4 system-ui,sans-serif}
+  .wrap{min-height:100dvh;display:grid;place-items:center;padding:32px 16px}
+  .row{display:flex;gap:48px;flex-wrap:wrap;justify-content:center}
+  .col{text-align:center}
+  .lbl{margin-top:14px;font-weight:700;letter-spacing:.08em;font-size:12px;color:#8b95b8}
+  .sub{font-size:11px;color:#5c6588;margin-top:2px}
+  .col.ok .lbl{color:#34d399}
+  .dl{--c:#3b82f6;width:108px;height:108px;border:0;border-radius:50%;padding:0;background:var(--c);color:#fff;position:relative;cursor:pointer;box-shadow:0 10px 28px color-mix(in srgb,var(--c) 40%,transparent)}
+  .dl.fail{--c:#a855f7}
+  .dl svg{position:absolute;inset:0;width:100%;height:100%}
+  .track{fill:none;stroke:rgba(255,255,255,.22);stroke-width:3.7;opacity:0}
+  .arc{fill:none;stroke:#fff;stroke-width:3.7;stroke-linecap:round;stroke-dasharray:262.8;stroke-dashoffset:262.8;opacity:0}
+  .wave{opacity:0}
+  .icon{fill:none;stroke:#fff;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
+  .pct{font:600 15px/1 system-ui;fill:#fff;opacity:0}
+  .dl.run{background:transparent}
+  .dl.run .track,.dl.run .arc,.dl.run .wave,.dl.run .pct{opacity:1}
+  .dl.run .icon{opacity:0}
+  .dl.done{background:var(--c)}
+  .dl.done .track,.dl.done .arc,.dl.done .wave,.dl.done .pct{opacity:0}
+  .dl.done .icon{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="row">
+    <div class="col ok">
+      <button class="dl" id="ok" aria-label="download ok"></button>
+      <div class="lbl">SUCCESS</div>
+      <div class="sub">every byte arrived</div>
+    </div>
+    <div class="col">
+      <button class="dl fail" id="no" aria-label="download fail"></button>
+      <div class="lbl">FAIL</div>
+      <div class="sub">the connection dropped</div>
+    </div>
+  </div>
+</div>
+<script>
+const R=41.8,C=2*Math.PI*R;
+const ARROW='M50 32 L50 62 M38 52 L50 66 L62 52';
+const CHECK='M34 52 L46 64 L68 40';
+function mount(btn){
+  btn.innerHTML=`<svg viewBox="0 0 100 100">
+    <defs><clipPath id="c${btn.id}"><circle cx="50" cy="50" r="36"/></clipPath></defs>
+    <circle class="track" cx="50" cy="50" r="${R}"/>
+    <circle class="arc" cx="50" cy="50" r="${R}" transform="rotate(-90 50 50)"/>
+    <g class="wave" clip-path="url(#c${btn.id})"><path class="surf" fill="var(--c)"/></g>
+    <text class="pct" x="50" y="54" text-anchor="middle">0%</text>
+    <path class="icon" d="${ARROW}"/>
+  </svg>`;
+}
+function surf(p){
+  const y=86-(p/100)*72;
+  return `M8 ${y} C 24 ${y-6}, 36 ${y+6}, 50 ${y} S 76 ${y-6}, 92 ${y} V 100 H8 Z`;
+}
+function run(btn,ok){
+  if(btn.busy) return;
+  btn.busy=true;
+  const arc=btn.querySelector('.arc');
+  const pct=btn.querySelector('.pct');
+  const icon=btn.querySelector('.icon');
+  const wave=btn.querySelector('.surf');
+  btn.classList.remove('done');
+  btn.classList.add('run');
+  icon.setAttribute('d',ARROW);
+  let t=0, drop=ok?101:58+Math.random()*18;
+  const id=setInterval(()=>{
+    t=Math.min(t+2.2, drop);
+    const p=Math.min(100,t);
+    arc.style.strokeDashoffset=String(C*(1-p/100));
+    pct.textContent=Math.round(p)+'%';
+    wave.setAttribute('d',surf(p));
+    if(t>=drop){
+      clearInterval(id);
+      if(ok){
+        btn.classList.remove('run');
+        btn.classList.add('done');
+        icon.setAttribute('d',CHECK);
+        setTimeout(()=>{icon.setAttribute('d',ARROW);btn.classList.remove('done');btn.busy=false;},1600);
+      }else{
+        btn.classList.remove('run');
+        icon.setAttribute('d',ARROW);
+        btn.busy=false;
+      }
+    }
+  },28);
+}
+mount(document.getElementById('ok'));
+mount(document.getElementById('no'));
+document.getElementById('ok').onclick=()=>run(ok,true);
+document.getElementById('no').onclick=()=>run(no,false);
+</script>
+</body>
+</html>

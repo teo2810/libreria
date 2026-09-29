@@ -2,12 +2,13 @@
   "name": "libreria",
   "updated": "2026-09-30",
   "items": [
-    {"id":"tab-pill-fab","title":"Tab + pill + FAB","tags":["tab","fab","ripple","glass"]},
+    {"id":"dl-wave","title":"Download onda","tags":["button","progress","success","fail"],"file":"demos/dl-wave.html"},
+    {"id":"tab-pill-fab","title":"Tab + pill + FAB","tags":["tab","fab"]},
     {"id":"dock-bead","title":"Dock perlina","tags":["tab","dock"]},
-    {"id":"segmented-pill","title":"Switch segmentato","tags":["button","segmented"]},
-    {"id":"chips","title":"Chip filtro","tags":["button","chips"]},
+    {"id":"segmented-pill","title":"Switch segmentato","tags":["button"]},
+    {"id":"chips","title":"Chip filtro","tags":["chips"]},
     {"id":"motion-tokens","title":"Token motion","tags":["animation"]},
-    {"id":"fab-expand","title":"FAB espandibile","tags":["fab","input"]},
+    {"id":"fab-expand","title":"FAB espandibile","tags":["fab"]},
     {"id":"ripple-sheet","title":"Ripple + sheet","tags":["button","modal"]},
     {"id":"feedback","title":"Feedback tap","tags":["animation"]}
   ]
