@@ -1,16 +1,14 @@
 {
   "name": "libreria",
   "updated": "2026-09-30",
-  "owner": "teo2810",
-  "sources": ["subSorbit","subSorbit-v2","Bfpo","Grocery_Shopping","Project_Subscriptions","Math_Training","Couple_Expenses","Independence_project","menu"],
   "items": [
-    {"id":"orbit-tabbar-fab","title":"Orbit tab bar + sun FAB","tags":["tab","fab","ripple","glass"],"from":"subSorbit-v2/src/components/bottom-nav.tsx","prompt":"tab bar glass con pill cyan che slitta, FAB sole al centro con ripple e anelli che ruotano"},
-    {"id":"bfpo-bead-dock","title":"Bead dock TabBar (drag)","tags":["tab","dock","drag"],"from":"Bfpo/src/components/TabBar.jsx + dock.css","prompt":"dock iOS con perlina colorata trascinabile tra le tab, scale sull'icona attiva"},
-    {"id":"glow-switch","title":"Glow period switch","tags":["button","segmented"],"from":"subSorbit-v2/src/components/period-switch.tsx","prompt":"switch pillola luminosa che misura e slitta su Mese/Anno"},
-    {"id":"filter-chips","title":"Filter chips","tags":["button","chips"],"from":"subSorbit-v2/src/components/filter-chips.tsx","prompt":"chip filtro rounded-full, attivo cyan su void"},
-    {"id":"orbit-motion","title":"Orbit motion tokens","tags":["animation"],"from":"subSorbit-v2/src/styles.css","prompt":"sun-breathe, float, iconpulse, pill-in, tab-flash, gear-spin, sun-pulse-glow, star-twinkle, glow-tap"},
-    {"id":"grocery-expand-fab","title":"Expand FAB + squash","tags":["fab","input"],"from":"Grocery_Shopping/index.html","prompt":"FAB che si espande in input, squash bounce e confirm scale"},
-    {"id":"m3-ripple-sheet","title":"Material ripple + sheet + QA pop","tags":["button","modal","fab"],"from":"Project_Subscriptions/index.html","prompt":"ripple M3, fabPulse/fabTap, modalSheetIn, qaPopIn/Out"},
-    {"id":"math-feedback","title":"Math feedback pops","tags":["animation"],"from":"Math_Training/index.html","prompt":"pop, bounceWin, pulseOk/Warn/Err, shakeSoft/Hard, joy1-4"}
+    {"id":"tab-pill-fab","title":"Tab + pill + FAB","tags":["tab","fab","ripple","glass"]},
+    {"id":"dock-bead","title":"Dock perlina","tags":["tab","dock"]},
+    {"id":"segmented-pill","title":"Switch segmentato","tags":["button","segmented"]},
+    {"id":"chips","title":"Chip filtro","tags":["button","chips"]},
+    {"id":"motion-tokens","title":"Token motion","tags":["animation"]},
+    {"id":"fab-expand","title":"FAB espandibile","tags":["fab","input"]},
+    {"id":"ripple-sheet","title":"Ripple + sheet","tags":["button","modal"]},
+    {"id":"feedback","title":"Feedback tap","tags":["animation"]}
   ]
 }
