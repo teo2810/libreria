@@ -1,22 +1,18 @@
 # libreria
 
-Catalogo dei pattern UI già sviluppati nei repo di **teo2810**: bottoni animati, tab/dock, FAB, dashboard motion.
+Pattern UI riutilizzabili: tab, dock, FAB, chip, motion.
 
-**Preview live:** apri `index.html` (o GitHub Pages) — ogni card è cliccabile, non serve una GIF.
+Apri `index.html` per le anteprime interattive. Ogni card ha un **id** — cita quello per riprodurre il pattern.
 
-## Come usarla con Grok
+| id | pattern |
+|---|---|
+| `tab-pill-fab` | barra tab vetro, indicatore a pillola, FAB centrale con ripple e anelli |
+| `dock-bead` | dock basso, indicatore a perlina, icona attiva ingrandita |
+| `segmented-pill` | switch a due opzioni con pillola che slitta |
+| `chips` | chip di filtro, stato attivo pieno |
+| `motion-tokens` | float, pulse, twinkle, tap glow, rotazione |
+| `fab-expand` | FAB che si allarga in campo input |
+| `ripple-sheet` | ripple sul tap + pannello che sale |
+| `feedback` | pop, pulse conferma, shake errore |
 
-Cita l’id, es. *“usa orbit-tabbar-fab”* o *“bead dock come Bfpo”*.
-
-| id | cosa | sorgente |
-|---|---|---|
-| `orbit-tabbar-fab` | tab glass + pill cyan + FAB sole (ripple, anelli) | subSorbit-v2 `bottom-nav.tsx` |
-| `bfpo-bead-dock` | dock iOS, perlina drag, scale icona | Bfpo `TabBar.jsx` + `dock.css` |
-| `glow-switch` | segmented Mese/Anno con pill misurata | `period-switch.tsx` |
-| `filter-chips` | chip status cyan | `filter-chips.tsx` |
-| `orbit-motion` | sun-breathe, float, iconpulse, gear-spin, twinkle, glow-tap | `styles.css` |
-| `grocery-expand-fab` | FAB → input + squash | Grocery_Shopping |
-| `m3-ripple-sheet` | ripple M3 + sheet pop | Project_Subscriptions |
-| `math-feedback` | pop / pulse / shake | Math_Training |
-
-Originali in `src/`. Catalogo machine-readable: `catalog.json`.
+Codice di riferimento in `src/`.
