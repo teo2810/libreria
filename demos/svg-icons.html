@@ -5,86 +5,288 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>svg-icons</title>
 <style>
-  :root{--bg:#070b14;--card:#0c1224;--fg:#eef2ff;--muted:#8b95b8;--cyan:#22d3ee}
-  *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--fg);font:13px/1.4 system-ui,sans-serif}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;padding:18px;max-width:980px;margin:0 auto}
-  .cell{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px 12px 12px;text-align:center}
-  .id{font:11px ui-monospace,monospace;color:var(--cyan)}
-  .name{margin:4px 0 10px;font-size:12px;color:var(--muted)}
-  .stage{height:120px;display:grid;place-items:center}
-  button.hit{background:0;border:0;padding:0;cursor:pointer;color:inherit}
-  svg{overflow:visible}
-  @keyframes fuse{0%,100%{transform:translate(18px,-10px) scale(1)}40%{transform:translate(2px,8px) scale(.92)}55%{transform:translate(0,12px) scale(.55);opacity:.85}62%{opacity:0}68%{opacity:0;transform:translate(0,12px) scale(.2)}78%{opacity:1;transform:translate(22px,-16px) scale(.7)}100%{transform:translate(18px,-10px) scale(1)}}
-  .blob-s{animation:fuse 2.8s cubic-bezier(.22,1,.36,1) infinite;transform-origin:16px 16px}
-  @keyframes tension{0%,100%{d:path("M12 28 C12 14,36 14,36 28 C36 40,24 46,24 54 C24 46,12 40,12 28 Z")}35%{d:path("M14 26 C10 12,38 10,36 26 C40 38,26 44,24 58 C22 44,10 38,14 26 Z")}60%{d:path("M12 30 C16 16,32 16,36 30 C34 42,26 48,24 52 C22 48,14 42,12 30 Z")}}
-  .drop-path{animation:tension 2.4s ease-in-out infinite}
-  .sunmoon.day .shade{transform:translate(18px,-6px);opacity:0}
-  .sunmoon.day .ray{opacity:1}
-  .sunmoon .shade{transition:transform .7s cubic-bezier(.22,1,.36,1),opacity .5s}
-  .sunmoon .ray{opacity:0;transform-origin:24px 24px;transition:opacity .4s,transform .7s cubic-bezier(.22,1,.36,1)}
-  .sunmoon.day .r1{transform:translate(0,-10px)}
-  .sunmoon.day .r2{transform:translate(8px,-6px)}
-  .sunmoon.day .r3{transform:translate(10px,0)}
-  .sunmoon.day .r4{transform:translate(8px,6px)}
-  .sunmoon.day .r5{transform:translate(0,10px)}
-  .sunmoon.day .r6{transform:translate(-8px,6px)}
-  .sunmoon.day .r7{transform:translate(-10px,0)}
-  .sunmoon.day .r8{transform:translate(-8px,-6px)}
-  .sunmoon.day .core{transform:rotate(180deg)}
-  .sunmoon .core{transform-origin:24px 24px;transition:transform .8s cubic-bezier(.22,1,.36,1)}
-  .save .disk{transform-origin:24px 24px;transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .25s}
-  .save .chk{opacity:0;transform:scale(.4);transform-origin:24px 24px;transition:opacity .25s .2s,transform .45s cubic-bezier(.22,1,.36,1)}
-  .save.on .disk{transform:rotate(90deg) scale(.2);opacity:0}
-  .save.on .chk{opacity:1;transform:scale(1)}
-  .box-ico .arr{transform-origin:24px 18px;transition:transform .55s cubic-bezier(.34,1.4,.64,1),stroke .3s}
-  .imp.on .arr{transform:translateY(10px) scaleY(1.35);stroke:#34d399}
-  .exp.on .arr{transform:translateY(-12px) scaleY(1.4);stroke:#34d399}
-  .cols{display:flex;gap:8px;align-items:stretch;height:96px}
-  .pane{width:28px;background:#1a2744;border-radius:8px;overflow:hidden;transition:width .7s cubic-bezier(.22,1,.36,1)}
-  .cols.open .pane{width:86px}
-  .pane .fake{opacity:0;padding:8px 6px;font-size:8px;color:#9aa6c4;text-align:left;transition:opacity .3s .45s}
-  .cols.open .pane .fake{opacity:1}
-  .hint{font-size:10px;color:#5c6588;margin-top:6px}
+:root{
+  --bg:#070b14; --card:#0d1426; --line:rgba(255,255,255,.08);
+  --fg:#eef2ff; --muted:#8b95b8; --cyan:#22d3ee; --mint:#34d399;
+  --blue:#3b82f6; --amber:#fbbf24; --ease:cubic-bezier(.22,1,.36,1);
+  --spring:cubic-bezier(.34,1.45,.64,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font:13px/1.4 system-ui,sans-serif}
+.wrap{max-width:920px;margin:0 auto;padding:18px 16px 28px}
+h1{font-size:15px;margin:0 0 4px;letter-spacing:.02em;color:#c9d4f0}
+.sub{color:var(--muted);margin:0 0 16px;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.cell{background:linear-gradient(180deg,#10182c,#0b1222);border:1px solid var(--line);border-radius:18px;padding:14px 12px 12px;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.28)}
+.id{font:11px ui-monospace,monospace;color:var(--cyan)}
+.name{margin:4px 0 2px;font-size:13px}
+.hint{font-size:10px;color:#5c6588;min-height:14px}
+.stage{height:132px;display:grid;place-items:center;position:relative}
+button.hit{background:0;border:0;padding:8px;cursor:pointer;color:inherit;border-radius:16px}
+button.hit:focus-visible{outline:2px solid var(--cyan)}
+svg{overflow:visible;display:block}
+.fusion-svg{width:88px;height:88px}
+.orb-s{animation:fuse 3.2s var(--ease) infinite;transform-box:fill-box;transform-origin:center}
+@keyframes fuse{
+  0%{transform:translate(14px,-16px) scale(1)}
+  28%{transform:translate(6px,-8px) scale(1.05)}
+  48%{transform:translate(1px,-1px) scale(.92)}
+  58%{transform:translate(0,2px) scale(.2)}
+  62%{transform:translate(0,2px) scale(.01);opacity:0}
+  68%{opacity:0;transform:translate(-12px,-18px) scale(.2)}
+  78%{opacity:1;transform:translate(-14px,-16px) scale(.85)}
+  100%{transform:translate(14px,-16px) scale(1)}
+}
+.split{position:relative;width:200px;height:108px}
+.split .col{
+  position:absolute;top:6px;left:50%;width:34px;height:96px;
+  margin-left:-17px;border-radius:17px;overflow:hidden;
+  background:linear-gradient(180deg,#1d2a48,#152038);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 8px 18px rgba(0,0,0,.25);
+  transition:transform .7s var(--ease),width .7s var(--ease),border-radius .7s var(--ease),background .5s;
+}
+.split .col.b{opacity:0}
+.split .fake{opacity:0;padding:10px 8px;font-size:9px;line-height:1.45;color:#b7c2dc;text-align:left;transition:opacity .28s ease .42s}
+.split.open .col.a{transform:translateX(-58px);width:92px;margin-left:-46px;border-radius:12px;background:linear-gradient(180deg,#1e3358,#15263f)}
+.split.open .col.b{opacity:1;transform:translateX(58px);width:92px;margin-left:-46px;border-radius:12px;background:linear-gradient(180deg,#1e3358,#15263f)}
+.split.open .fake{opacity:1}
+.split .bar{height:6px;width:70%;border-radius:99px;background:rgba(34,211,238,.35);margin-bottom:6px}
+.split .ln{height:4px;width:88%;border-radius:99px;background:rgba(255,255,255,.12);margin:5px 0}
+.tension path{filter:drop-shadow(0 6px 10px rgba(34,211,238,.25))}
+.sm .shade{transition:transform .75s var(--ease),opacity .45s}
+.sm .core{transform-origin:32px 32px;transition:transform .8s var(--ease),fill .5s}
+.sm .rayc{transform-origin:32px 32px}
+.sm .ray{transform-origin:32px 32px;opacity:0;transition:transform .7s var(--spring),opacity .35s}
+.sm.day .shade{transform:translate(16px,-8px);opacity:0}
+.sm.day .core{transform:rotate(180deg);fill:#fff6d5}
+.sm.day .ray{opacity:1}
+.sm.day .ray:nth-child(1){transform:translate(0,-13px)}
+.sm.day .ray:nth-child(2){transform:translate(9px,-9px)}
+.sm.day .ray:nth-child(3){transform:translate(13px,0)}
+.sm.day .ray:nth-child(4){transform:translate(9px,9px)}
+.sm.day .ray:nth-child(5){transform:translate(0,13px)}
+.sm.day .ray:nth-child(6){transform:translate(-9px,9px)}
+.sm.day .ray:nth-child(7){transform:translate(-13px,0)}
+.sm.day .ray:nth-child(8){transform:translate(-9px,-9px)}
+.save-ico{width:72px;height:72px}
+.save-ico .disk{transform-origin:32px 32px;transition:transform .55s var(--ease),opacity .28s}
+.save-ico .blob{opacity:0;transform-origin:32px 32px}
+.save-ico .chk{stroke-dasharray:36;stroke-dashoffset:36;opacity:0}
+.save-ico.on .disk{transform:rotate(110deg) scale(.15);opacity:0}
+.save-ico.on .blob{animation:liq .9s var(--ease) both}
+.save-ico.on .chk{animation:draw .45s ease .55s forwards}
+@keyframes liq{
+  0%{opacity:0;transform:rotate(0) scale(.4)}
+  30%{opacity:1;transform:rotate(80deg) scale(1.05)}
+  70%{opacity:1;transform:rotate(160deg) scale(.85)}
+  100%{opacity:0;transform:rotate(200deg) scale(.2)}
+}
+@keyframes draw{to{stroke-dashoffset:0;opacity:1}}
+.save-ico.back .chk{animation:undraw .35s ease forwards}
+.save-ico.back .disk{transition-delay:.15s}
+@keyframes undraw{from{stroke-dashoffset:0;opacity:1}to{stroke-dashoffset:36;opacity:0}}
+.box-ico{width:72px;height:72px}
+.box-ico .tray{transition:transform .35s var(--spring)}
+.box-ico .shaft,.box-ico .head{stroke:#e2e8f0;transition:stroke .3s}
+.box-ico .drop{opacity:0}
+.imp.go .shaft,.imp.go .head{stroke:#34d399}
+.imp.go .arr{animation:impArr .7s var(--spring)}
+.imp.go .tray{animation:boxCatch .7s var(--spring)}
+@keyframes impArr{
+  0%{transform:translateY(0) scaleY(1)}
+  35%{transform:translateY(4px) scaleY(1.35)}
+  70%{transform:translateY(14px) scaleY(.92)}
+  100%{transform:translateY(0) scaleY(1)}
+}
+@keyframes boxCatch{
+  0%,100%{transform:none}
+  60%{transform:scaleY(.94) translateY(1px)}
+}
+.exp.go .shaft,.exp.go .head{stroke:#34d399}
+.exp.go .arr{animation:expArr .75s var(--spring)}
+.exp.go .drop{animation:expDrop .75s var(--ease) forwards}
+@keyframes expArr{
+  0%{transform:translateY(0) scaleY(1)}
+  30%{transform:translateY(-4px) scaleY(1.28)}
+  55%{transform:translateY(-16px) scaleY(1.05)}
+  100%{transform:translateY(0) scaleY(1)}
+}
+@keyframes expDrop{
+  0%{opacity:0;transform:translateY(0) scale(.4)}
+  40%{opacity:1;transform:translateY(-8px) scale(1)}
+  100%{opacity:0;transform:translateY(-22px) scale(.3)}
+}
+@media (prefers-reduced-motion:reduce){
+  .orb-s,.tension path,.save-ico.on .blob{animation:none}
+}
 </style>
 </head>
 <body>
-<div class="grid">
-  <div class="cell" id="drop-fusion"><div class="id">drop-fusion</div><div class="name">Gocce · liquid fusion</div>
-    <div class="stage"><svg width="72" height="72" viewBox="0 0 48 48"><defs><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="b"/><feColorMatrix in="b" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"/></filter></defs>
-    <g filter="url(#goo)" fill="#22d3ee"><circle cx="24" cy="28" r="11"/><circle class="blob-s" cx="16" cy="16" r="6"/></g></svg></div></div>
-  <div class="cell" id="col-split"><div class="id">col-split</div><div class="name">Colonne sdoppiabili</div>
-    <div class="stage"><button class="hit" id="colsBtn" aria-label="split"><div class="cols" id="cols"><div class="pane"><div class="fake">id 12<br/>nome A<br/>€ 24</div></div><div class="pane"><div class="fake">id 13<br/>nome B<br/>€ 18</div></div></div></button></div><div class="hint">click</div></div>
-  <div class="cell" id="path-tension"><div class="id">path-tension</div><div class="name">Path · tensione</div>
-    <div class="stage"><svg width="56" height="56" viewBox="0 0 48 64"><path class="drop-path" fill="#38bdf8" d="M12 28 C12 14,36 14,36 28 C36 40,24 46,24 54 C24 46,12 40,12 28 Z"/></svg></div></div>
-  <div class="cell" id="sun-moon"><div class="id">sun-moon</div><div class="name">Mezzaluna ➜ sole</div>
-    <div class="stage"><button class="hit" id="smBtn" aria-label="theme"><svg class="sunmoon" id="sm" width="64" height="64" viewBox="0 0 48 48">
-      <g class="ray" fill="#fbbf24"><circle class="r1" cx="24" cy="8" r="2.2"/><circle class="r2" cx="24" cy="8" r="2.2"/><circle class="r3" cx="24" cy="8" r="2.2"/><circle class="r4" cx="24" cy="8" r="2.2"/><circle class="r5" cx="24" cy="8" r="2.2"/><circle class="r6" cx="24" cy="8" r="2.2"/><circle class="r7" cx="24" cy="8" r="2.2"/><circle class="r8" cx="24" cy="8" r="2.2"/></g>
-      <g class="core"><circle cx="24" cy="24" r="9" fill="#f8fafc"/><circle class="shade" cx="24" cy="24" r="9" fill="#0b1220"/></g>
-    </svg></button></div><div class="hint">click</div></div>
-  <div class="cell" id="save-morph"><div class="id">save-morph</div><div class="name">Salva · floppy ➜ spunta</div>
-    <div class="stage"><button class="hit save" id="sv" aria-label="save"><svg width="56" height="56" viewBox="0 0 48 48">
-      <g class="disk"><rect x="10" y="10" width="28" height="28" rx="4" fill="#3b82f6"/><rect x="16" y="10" width="16" height="10" rx="1.5" fill="#bfdbfe"/><rect x="15" y="24" width="18" height="10" rx="1.5" fill="#eff6ff"/></g>
-      <path class="chk" d="M14 25 L21 32 L34 16" fill="none" stroke="#34d399" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></button></div><div class="hint">click</div></div>
-  <div class="cell" id="import-arrow"><div class="id">import-arrow</div><div class="name">Import · freccia giù</div>
-    <div class="stage"><button class="hit box-ico imp" id="imp" aria-label="import"><svg width="56" height="56" viewBox="0 0 48 48" fill="none">
-      <path d="M12 22 V34 Q12 38 16 38 H32 Q36 38 36 34 V22" stroke="#94a3b8" stroke-width="2.4"/>
-      <path class="arr" d="M24 8 V26 M17 20 L24 28 L31 20" stroke="#e2e8f0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></button></div><div class="hint">click</div></div>
-  <div class="cell" id="export-arrow"><div class="id">export-arrow</div><div class="name">Export · freccia su</div>
-    <div class="stage"><button class="hit box-ico exp" id="exp" aria-label="export"><svg width="56" height="56" viewBox="0 0 48 48" fill="none">
-      <path d="M12 22 V34 Q12 38 16 38 H32 Q36 38 36 34 V22" stroke="#94a3b8" stroke-width="2.4"/>
-      <path class="arr" d="M24 28 V10 M17 16 L24 8 L31 16" stroke="#e2e8f0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg></button></div><div class="hint">click</div></div>
+<div class="wrap">
+  <h1>svg-icons</h1>
+  <p class="sub">Set unico. Click dove indicato.</p>
+  <div class="grid">
+    <article class="cell" id="drop-fusion">
+      <div class="id">drop-fusion</div>
+      <div class="name">Gocce · liquid fusion</div>
+      <div class="stage">
+        <svg class="fusion-svg" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <filter id="goo" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="3.2" result="b"/>
+              <feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -8" result="g"/>
+              <feBlend in="SourceGraphic" in2="g"/>
+            </filter>
+            <linearGradient id="liq" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#7df0ff"/><stop offset="1" stop-color="#22d3ee"/>
+            </linearGradient>
+          </defs>
+          <g filter="url(#goo)" fill="url(#liq)">
+            <circle cx="32" cy="38" r="13"/>
+            <circle class="orb-s" cx="32" cy="38" r="6.5"/>
+          </g>
+        </svg>
+      </div>
+      <div class="hint">loop</div>
+    </article>
+    <article class="cell" id="col-split">
+      <div class="id">col-split</div>
+      <div class="name">Colonne sdoppiabili</div>
+      <div class="stage">
+        <button class="hit" id="colsBtn" aria-label="sdoppia colonna">
+          <div class="split" id="cols">
+            <div class="col a"><div class="fake"><div class="bar"></div><div class="ln"></div><div class="ln"></div>id 12 · A<br>€ 24.00</div></div>
+            <div class="col b"><div class="fake"><div class="bar"></div><div class="ln"></div><div class="ln"></div>id 13 · B<br>€ 18.50</div></div>
+          </div>
+        </button>
+      </div>
+      <div class="hint">click</div>
+    </article>
+    <article class="cell" id="path-tension">
+      <div class="id">path-tension</div>
+      <div class="name">Path · tensione</div>
+      <div class="stage">
+        <svg class="tension" width="56" height="72" viewBox="0 0 48 64" aria-hidden="true">
+          <path fill="#38bdf8" d="M24 6 C18 16 12 22 12 34 C12 44 17 52 24 52 C31 52 36 44 36 34 C36 22 30 16 24 6 Z">
+            <animate attributeName="d" dur="2.6s" repeatCount="indefinite" calcMode="spline"
+              keyTimes="0;0.35;0.62;1" keySplines="0.22 1 0.36 1;0.22 1 0.36 1;0.22 1 0.36 1"
+              values="M24 6 C18 16 12 22 12 34 C12 44 17 52 24 52 C31 52 36 44 36 34 C36 22 30 16 24 6 Z;M24 4 C14 14 8 24 11 36 C13 48 18 56 24 56 C30 56 35 48 37 36 C40 24 34 14 24 4 Z;M24 10 C20 18 16 24 14 32 C12 42 16 48 24 48 C32 48 36 42 34 32 C32 24 28 18 24 10 Z;M24 6 C18 16 12 22 12 34 C12 44 17 52 24 52 C31 52 36 44 36 34 C36 22 30 16 24 6 Z"/>
+          </path>
+        </svg>
+      </div>
+      <div class="hint">loop</div>
+    </article>
+    <article class="cell" id="sun-moon">
+      <div class="id">sun-moon</div>
+      <div class="name">Mezzaluna → sole</div>
+      <div class="stage">
+        <button class="hit" id="smBtn" aria-label="giorno notte">
+          <svg class="sm" id="sm" width="72" height="72" viewBox="0 0 64 64">
+            <g class="rayc">
+              <circle class="ray" cx="32" cy="32" r="3.1" fill="#fbbf24"/>
+              <circle class="ray" cx="32" cy="32" r="3.1" fill="#fbbf24"/>
+              <circle class="ray" cx="32" cy="32" r="3.1" fill="#fbbf24"/>
+              <circle class="ray" cx="32" cy="32" r="3.1" fill="#fbbf24"/>
+              <circle class="ray" cx="32" cy="32" r="3.1" fill="#fbbf24"/>
+              <circle class="ray" cx="32" cy="32" r="3.1" fill="#fbbf24"/>
+              <circle class="ray" cx="32" cy="32" r="3.1" fill="#fbbf24"/>
+              <circle class="ray" cx="32" cy="32" r="3.1" fill="#fbbf24"/>
+            </g>
+            <circle class="core" cx="32" cy="32" r="11" fill="#f8fafc"/>
+            <circle class="shade" cx="38" cy="28" r="11" fill="#070b14"/>
+          </svg>
+        </button>
+      </div>
+      <div class="hint">click</div>
+    </article>
+    <article class="cell" id="save-morph">
+      <div class="id">save-morph</div>
+      <div class="name">Salva · floppy → spunta</div>
+      <div class="stage">
+        <button class="hit" id="svBtn" aria-label="salva">
+          <svg class="save-ico" id="sv" viewBox="0 0 64 64">
+            <defs>
+              <filter id="goo2" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2.4" result="b"/>
+                <feColorMatrix in="b" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8"/>
+              </filter>
+            </defs>
+            <g class="disk">
+              <rect x="16" y="16" width="32" height="32" rx="5" fill="#3b82f6"/>
+              <rect x="23" y="16" width="18" height="11" rx="1.6" fill="#bfdbfe"/>
+              <rect x="21" y="32" width="22" height="12" rx="1.6" fill="#eff6ff"/>
+            </g>
+            <g class="blob" filter="url(#goo2)" fill="#3b82f6">
+              <circle cx="32" cy="32" r="11"/>
+              <circle cx="24" cy="28" r="7"/>
+              <circle cx="40" cy="30" r="7"/>
+            </g>
+            <path class="chk" d="M20 34 L29 43 L46 22" fill="none" stroke="#34d399" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="hint">click · ciclo</div>
+    </article>
+    <article class="cell" id="import-arrow">
+      <div class="id">import-arrow</div>
+      <div class="name">Import · freccia giù</div>
+      <div class="stage">
+        <button class="hit" id="impBtn" aria-label="importa">
+          <svg class="box-ico imp" id="imp" viewBox="0 0 64 64" fill="none">
+            <path class="tray" d="M16 30 V44 Q16 50 22 50 H42 Q48 50 48 44 V30" stroke="#94a3b8" stroke-width="2.6" stroke-linecap="round"/>
+            <g class="arr" style="transform-origin:32px 24px">
+              <path class="shaft" d="M32 10 V36" stroke-width="2.8" stroke-linecap="round"/>
+              <path class="head" d="M22 28 L32 40 L42 28" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </svg>
+        </button>
+      </div>
+      <div class="hint">click</div>
+    </article>
+    <article class="cell" id="export-arrow">
+      <div class="id">export-arrow</div>
+      <div class="name">Export · freccia su</div>
+      <div class="stage">
+        <button class="hit" id="expBtn" aria-label="esporta">
+          <svg class="box-ico exp" id="exp" viewBox="0 0 64 64" fill="none">
+            <path class="tray" d="M16 30 V44 Q16 50 22 50 H42 Q48 50 48 44 V30" stroke="#94a3b8" stroke-width="2.6" stroke-linecap="round"/>
+            <g class="arr" style="transform-origin:32px 28px">
+              <path class="shaft" d="M32 38 V14" stroke-width="2.8" stroke-linecap="round"/>
+              <path class="head" d="M22 24 L32 12 L42 24" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <circle class="drop" cx="32" cy="12" r="3.2" fill="#34d399"/>
+          </svg>
+        </button>
+      </div>
+      <div class="hint">click</div>
+    </article>
+  </div>
 </div>
 <script>
-const tap=(id,fn)=>{document.getElementById(id).onclick=fn};
-tap('colsBtn',()=>document.getElementById('cols').classList.toggle('open'));
-tap('smBtn',()=>document.getElementById('sm').classList.toggle('day'));
-tap('sv',()=>{const b=document.getElementById('sv');b.classList.add('on');setTimeout(()=>b.classList.remove('on'),1400);});
-tap('imp',()=>{const b=document.getElementById('imp');b.classList.add('on');setTimeout(()=>b.classList.remove('on'),700);});
-tap('exp',()=>{const b=document.getElementById('exp');b.classList.add('on');setTimeout(()=>b.classList.remove('on'),700);});
+const cols = document.getElementById('cols');
+document.getElementById('colsBtn').onclick = () => cols.classList.toggle('open');
+document.getElementById('smBtn').onclick = () => document.getElementById('sm').classList.toggle('day');
+const sv = document.getElementById('sv');
+let saving = false;
+document.getElementById('svBtn').onclick = () => {
+  if (saving) return;
+  saving = true;
+  sv.classList.remove('back');
+  sv.classList.add('on');
+  setTimeout(() => {
+    sv.classList.add('back');
+    sv.classList.remove('on');
+    setTimeout(() => { sv.classList.remove('back'); saving = false; }, 400);
+  }, 1600);
+};
+function pulse(el){
+  el.classList.remove('go');
+  void el.offsetWidth;
+  el.classList.add('go');
+  setTimeout(() => el.classList.remove('go'), 800);
+}
+document.getElementById('impBtn').onclick = () => pulse(document.getElementById('imp'));
+document.getElementById('expBtn').onclick = () => pulse(document.getElementById('exp'));
 </script>
 </body>
 </html>
