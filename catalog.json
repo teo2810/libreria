@@ -2,14 +2,21 @@
   "name": "libreria",
   "updated": "2026-09-30",
   "items": [
-    {"id":"dl-wave","title":"Download onda","tags":["button","progress","success","fail"],"file":"demos/dl-wave.html"},
-    {"id":"tab-pill-fab","title":"Tab + pill + FAB","tags":["tab","fab"]},
-    {"id":"dock-bead","title":"Dock perlina","tags":["tab","dock"]},
-    {"id":"segmented-pill","title":"Switch segmentato","tags":["button"]},
-    {"id":"chips","title":"Chip filtro","tags":["chips"]},
-    {"id":"motion-tokens","title":"Token motion","tags":["animation"]},
-    {"id":"fab-expand","title":"FAB espandibile","tags":["fab"]},
-    {"id":"ripple-sheet","title":"Ripple + sheet","tags":["button","modal"]},
-    {"id":"feedback","title":"Feedback tap","tags":["animation"]}
+    {"id":"dl-wave","file":"demos/dl-wave.html","tags":["button","progress"]},
+    {"id":"drop-fusion","file":"demos/svg-icons.html#drop-fusion","tags":["icon","svg"]},
+    {"id":"col-split","file":"demos/svg-icons.html#col-split","tags":["icon","layout"]},
+    {"id":"path-tension","file":"demos/svg-icons.html#path-tension","tags":["icon","svg"]},
+    {"id":"sun-moon","file":"demos/svg-icons.html#sun-moon","tags":["icon","toggle"]},
+    {"id":"save-morph","file":"demos/svg-icons.html#save-morph","tags":["icon","button"]},
+    {"id":"import-arrow","file":"demos/svg-icons.html#import-arrow","tags":["icon","button"]},
+    {"id":"export-arrow","file":"demos/svg-icons.html#export-arrow","tags":["icon","button"]},
+    {"id":"tab-pill-fab","tags":["tab","fab"]},
+    {"id":"dock-bead","tags":["tab"]},
+    {"id":"segmented-pill","tags":["button"]},
+    {"id":"chips","tags":["chips"]},
+    {"id":"motion-tokens","tags":["animation"]},
+    {"id":"fab-expand","tags":["fab"]},
+    {"id":"ripple-sheet","tags":["button"]},
+    {"id":"feedback","tags":["animation"]}
   ]
 }
